@@ -30,7 +30,7 @@ class PessoaListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         if ctps:
             queryset = queryset.filter(ctps__icontains=ctps)
         if data_nascimento:
-            queryset = queryset.filter(data_nascimento__icontains=data_nascimento)
+            queryset = queryset.filter(data_nascimento=data_nascimento)
         if genero:
             queryset = queryset.filter(genero=genero)
 
