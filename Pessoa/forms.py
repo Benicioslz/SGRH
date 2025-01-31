@@ -12,7 +12,7 @@ class PessoaForm(forms.ModelForm):
             'rg': forms.TextInput(attrs={'class': 'form-control'}),
             'cpf': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '000.000.000-00'}),
             'ctps': forms.TextInput(attrs={'class': 'form-control'}),
-            'data_nascimento': forms.DateField(widget=forms.DateInput(format='%dd/%mm/%YYYY')),
+            'data_nascimento': forms.DateInput(attrs={'class': 'form-control'}, format='%dd/%mm/%YYYY')),
             'genero': forms.Select(attrs={'class': 'form-control'}),
         }
 
