@@ -49,7 +49,7 @@ Um sitema web simples, o objetivo deste projeto foi demonstrar como é feito na 
    ```bash
    pip install -r requirements.txt
    ```
-6. **Configurar o Banco de Dados para o sistema:**
+6. **Configurar o Banco de Dados para o Sistema: App/settings.py**
 
   **POSTGRESQL**
    ```bash
@@ -94,6 +94,11 @@ Um sitema web simples, o objetivo deste projeto foi demonstrar como é feito na 
 Após instalar as dependências e configurar a comunicação com o banco, aplique as migrations no banco de dados com o comando:
 ```bash
 python manage.py migrate
+```
+
+Criar um usuário admin com o comando no terminal:
+```bash
+python manage.py createsuperuser
 ```
 
 Agora o projeto já pode ser inicializado com o comando:
