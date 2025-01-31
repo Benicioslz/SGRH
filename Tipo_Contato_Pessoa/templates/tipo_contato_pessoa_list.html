@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}
+SGRH - Tipo Contato Pessoa
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form method="get" action="{% url 'tipo_contato_pessoa_list' %}">
+      <div class="input-group">
+        <input type="text" class="form-control" name="contato" placeholder="Contato" value="{{ request.GET.contato }}">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  {% if perms.tipo_contato_pessoas.add_tipo_contato_pessoa %}
+  <div class="col-md-6">
+    <a href="{% url 'tipo_contato_pessoa_create' %}" class="btn btn-success float-end">
+      <i class="bi bi-plus"></i> Novo Tipo Contato Pessoa
+    </a>
+  </div>
+  {% endif %}
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form method="get" action="{% url 'tipo_contato_pessoa_list' %}">
+      <div class="input-group">
+        <select class="form-select" name="tipo_contato">
+          <option value="" {% if not request.GET.tipo_contato %} selected {% endif %}>Todos os Tipos de Contatos</option>
+          {% for tipo_contato in tipo_contatos %}
+            <option value="{{ tipo_contato.id }}" {% if request.GET.tipo_contato == tipo_contato.id %} selected {% endif %}>{{ tipo_contato.nome }}</option>
+          {% endfor %}
+        </select>
+        <select class="form-select" name="pessoa">
+          <option value="" {% if not request.GET.pessoa %} selected {% endif %}>Todas as Pessoas</option>
+          {% for pessoa in pessoas %}
+            <option value="{{ pessoa.id }}" {% if request.GET.pessoa == pessoa.id %} selected {% endif %}>{{ pessoa.nome }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-filter"></i> Filtrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Tipo de Contato</th>
+        <th>Pessoa</th>
+        <th>Contato</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tipo_contato_pessoa in tipo_contato_pessoas %}
+      <tr>
+        <td>
+          <a href="{% url 'tipo_contato_pessoa_detail' tipo_contato_pessoa.id %}" class="text-primary fw-semibold">
+            {{ tipo_contato_pessoa.id }}
+          </a>
+        </td>
+        <td>{{ tipo_contato_pessoa.tipo_contato }}</td>
+        <td>{{ tipo_contato_pessoa.pessoa }}</td>
+        <td>{{ tipo_contato_pessoa.contato }}</td>
+        <td>
+          <a href="{% url 'tipo_contato_pessoa_detail' tipo_contato_pessoa.id %}" class="btn btn-info btn-sm">
+            <i class="bi bi-eye"></i>
+          </a>
+
+          {% if perms.tipo_contato_pessoas.change_tipo_contato_pessoa %}
+          <a href="{% url 'tipo_contato_pessoa_update' tipo_contato_pessoa.id %}" class="btn btn-warning btn-sm">
+            <i class="bi bi-pencil"></i>
+          </a>
+          {% endif %}
+
+          {% if perms.tipo_contato_pessoas.delete_tipo_contato_pessoa %}
+          <a href="{% url 'tipo_contato_pessoa_delete' tipo_contato_pessoa.id %}" class="btn btn-danger btn-sm btn-delete">
+            <i class="bi bi-trash"></i>
+          </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% include 'components/_pagination.html' %}
+
+{% endblock %}

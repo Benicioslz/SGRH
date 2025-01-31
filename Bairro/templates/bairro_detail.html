@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h3 class="display-4">Detalhes do Bairro</h3>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ object.nome }}</h3>
+      </div>
+    </div>
+
+    <a href="{% url 'bairro_list' %}" class="btn btn-secondary mt-3">Voltar</a>
+  </div>
+{% endblock %}

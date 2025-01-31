@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h3 class="display-4">Detalhes do Tipo Contato Pessoa</h3>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ object.pessoa }}</h3>
+        <p class="card-text">{{ object.tipo_contato }}</p>
+        <p class="card-text">{{ object.contato }}</p>
+      </div>
+    </div>
+
+    <a href="{% url 'tipo_contato_pessoa_list' %}" class="btn btn-secondary mt-3">Voltar</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,127 @@
+<div class="row flex-nowrap">
+  <div class="col-auto col-md-0 col-xl-0 px-0 bg-dark">
+    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
+      <button class="btn btn-dark d-block d-sm-none mb-3" type="button" data-bs-toggle="collapse"
+        data-bs-target="#menuCollapse" aria-expanded="false" aria-controls="menuCollapse">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+      <div class="collapse d-sm-block" id="menuCollapse">
+        <ul class="nav flex-column align-items-start" id="menu">
+          <li>
+            <a href="{% url 'home' %}" class="nav-link px-0 align-middle">
+              <i class="bi bi-house-door-fill"></i>
+              <span class="ms-1">home</span>
+            </a>
+          </li>
+          {% if perms.estados.view_estado %}
+            <li>
+              <a href="{% url 'estado_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-geo-fill"></i>
+                <span class="ms-1">Estado</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.cidades.view_cidade %}
+            <li>
+              <a href="{% url 'cidade_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-building"></i>
+                <span class="ms-1">Cidade</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.bairros.view_bairro %}
+            <li>
+              <a href="{% url 'bairro_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-pin-fill"></i>
+                <span class="ms-1">Bairro</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.generos.view_genero %}
+            <li>
+              <a href="{% url 'genero_list' %}" class="nav-link px-0 align-middle">
+                <i class="fa-solid fa-genderless"></i>
+                <span class="ms-1">Gênero</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.pessoas.view_pessoa %}
+            <li>
+              <a href="{% url 'pessoa_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-people"></i>
+                <span class="ms-1">Pessoa</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.enderecos.view_endereco %}
+            <li>
+              <a href="{% url 'endereco_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span class="ms-1">Endereço</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.tipo_contatos.view_tipo_contato %}
+            <li>
+              <a href="{% url 'tipo_contato_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-telephone-plus-fill"></i>
+                <span class="ms-1">Tipo Contato</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.tipo_contato_pessoas.view_tipo_contato_pessoa %}
+            <li>
+              <a href="{% url 'tipo_contato_pessoa_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-person-bounding-box"></i>
+                <span class="ms-1">Tipo Contato Pessoa</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.setores.view_setor %}
+            <li>
+              <a href="{% url 'setor_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-diagram-3"></i>
+                <span class="ms-1">Setor</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.cargos.view_cargo %}
+            <li>
+              <a href="{% url 'cargo_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-briefcase"></i>
+                <span class="ms-1">Cargo</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.lotacoes.view_lotacao %}
+            <li>
+              <a href="{% url 'lotacao_list' %}" class="nav-link px-0 align-middle">
+                <i class="bi bi-person-badge"></i>
+                <span class="ms-1">Lotação</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if perms.historicos_salariais.view_historico_salarial %}
+            <li>
+              <a href="{% url 'historico_salarial_list' %}" class="nav-link px-0 align-middle">
+                </i><i class="bi bi-cash-stack"></i>
+                <span class="ms-1">Histórico Salarial</span>
+              </a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post" id="logout-form" class="nav-link px-0 align-middle">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link text-decoration-none text-reset nav-link px-0 align-middle">
+                <i class="bi bi-box-arrow-right fs-4 align-middle"></i>
+                <span class="ms-1 align-middle">Sair</span>
+              </button>
+            </form>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+      <hr>
+    </div>
+  </div>

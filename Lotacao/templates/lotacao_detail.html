@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h3 class="display-4">Detalhes da Lotação</h3>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ object.id }}</h3>
+        <p class="card-text">Pessoa: {{ object.pessoa }}</p>
+        <p class="card-text">Setor: {{ object.setor }}</p>
+        <p class="card-text">Cargo: {{ object.cargo }}</p>
+        <p class="card-text">Cargo: {{ object.matricula }}</p>
+        <p class="card-text">Cargo: {{ object.data_admissao }}</p>
+        <p class="card-text">Cargo: {{ object.data_demissional}}</p>
+      </div>
+    </div>
+
+    <a href="{% url 'lotacao_list' %}" class="btn btn-secondary mt-3">Voltar</a>
+  </div>
+{% endblock %}

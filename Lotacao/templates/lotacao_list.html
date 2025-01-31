@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}
+SGRH - Lotações
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form method="get" action="{% url 'lotacao_list' %}">
+      <div class="input-group">
+        <select class="form-select" name="pessoa">
+          <option value="" {% if not request.GET.pessoa %} selected {% endif %}>Todas as Pessoas</option>
+          {% for pessoa in pessoas %}
+            <option value="{{ pessoa.id }}" {% if request.GET.cargo == pessoa.id %} selected {% endif %}>{{ pessoa.nome }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-filter"></i> Filtrar
+      </div>
+    </form>
+  </div>
+  {% if perms.lotacoes.add_lotacao %}
+  <div class="col-md-6">
+    <a href="{% url 'lotacao_create' %}" class="btn btn-success float-end">
+      <i class="bi bi-plus"></i> Nova Lotação
+    </a>
+  </div>
+  {% endif %}
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form method="get" action="{% url 'lotacao_list' %}">
+      <div class="input-group">
+        <select class="form-select" name="setor">
+          <option value="" {% if not request.GET.setor %} selected {% endif %}>Todos os Setores</option>
+          {% for setor in setores %}
+            <option value="{{ setor.id }}" {% if request.GET.setor == setor.id %} selected {% endif %}>{{ setor.nome }}</option>
+          {% endfor %}
+        </select>
+        <select class="form-select" name="cargo">
+          <option value="" {% if not request.GET.cargo %} selected {% endif %}>Todos os Cargos</option>
+          {% for cargo in cargos %}
+            <option value="{{ cargo.id }}" {% if request.GET.cargo == cargo.id %} selected {% endif %}>{{ cargo.nome }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-filter"></i> Filtrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Pessoa</th>
+        <th>Setor</th>
+        <th>Cargo</th>
+        <th>Matricula</th>
+        <th>Data de Admissão</th>
+        <th>Data Demissional</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for lotacao in lotacoes %}
+      <tr>
+        <td>
+          <a href="{% url 'lotacao_detail' lotacao.id %}" class="text-primary fw-semibold">
+            {{ lotacao.id }}
+          </a>
+        </td>
+        <td>{{ lotacao.pessoa }}</td>
+        <td>{{ lotacao.setor }}</td>
+        <td>{{ lotacao.cargo }}</td>
+        <td>{{ lotacao.matricula }}</td>
+        <td>{{ lotacao.data_admissao }}</td>
+        <td>{{ lotacao.data_demissional }}</td>
+        <td>
+          <a href="{% url 'lotacao_detail' lotacao.id %}" class="btn btn-info btn-sm">
+            <i class="bi bi-eye"></i>
+          </a>
+
+          {% if perms.lotacoes.change_lotacao %}
+          <a href="{% url 'lotacao_update' lotacao.id %}" class="btn btn-warning btn-sm">
+            <i class="bi bi-pencil"></i>
+          </a>
+          {% endif %}
+
+          {% if perms.lotacoes.delete_lotacao %}
+          <a href="{% url 'lotacao_delete' lotacao.id %}" class="btn btn-danger btn-sm btn-delete">
+            <i class="bi bi-trash"></i>
+          </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% include 'components/_pagination.html' %}
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+SGRH - Endereços
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form method="get" action="{% url 'endereco_list' %}">
+      <div class="input-group">
+        <input type="text" class="form-control" name="logradouro" placeholder="Logradouro" value="{{ request.GET.logradouro }}">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  {% if perms.enderecos.add_endereco %}
+  <div class="col-md-6">
+    <a href="{% url 'endereco_create' %}" class="btn btn-success float-end">
+      <i class="bi bi-plus"></i> Novo Endereço
+    </a>
+  </div>
+  {% endif %}
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <form method="get" action="{% url 'endereco_list' %}">
+      <div class="input-group">
+        <select class="form-select" name="pessoa">
+          <option value="" {% if not request.GET.pessoa %} selected {% endif %}>Todas as Pessoas</option>
+          {% for pessoa in pessoas %}
+            <option value="{{ pessoa.id }}" {% if request.GET.pessoa == pessoa.id %} selected {% endif %}>{{ pessoa.nome }}</option>
+          {% endfor %}
+        </select>
+
+        <select class="form-select" name="bairro">
+          <option value="" {% if not request.GET.bairro %} selected {% endif %}>Todos os Bairros</option>
+          {% for bairro in bairros %}
+            <option value="{{ bairro.id }}" {% if request.GET.bairro == bairro.id %} selected {% endif %}>{{ bairro.nome }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-filter"></i> Filtrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Logradouro</th>
+        <th>Cep</th>
+        <th>Numero</th>
+        <th>Complemento</th>
+        <th>Pessoa</th>
+        <th>Bairro</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for endereco in enderecos %}
+      <tr>
+        <td>
+          <a href="{% url 'endereco_detail' endereco.id %}" class="text-primary fw-semibold">
+            {{ endereco.id }}
+          </a>
+        </td>
+        <td>{{ endereco.logradouro }}</td>
+        <td>{{ endereco.cep }}</td>
+        <td>{{ endereco.numero }}</td>
+        <td>{{ endereco.complemento }}</td>
+        <td>{{ endereco.pessoa }}</td>
+        <td>{{ endereco.bairro }}</td>
+        <td>
+          <a href="{% url 'endereco_detail' endereco.id %}" class="btn btn-info btn-sm">
+            <i class="bi bi-eye"></i>
+          </a>
+
+          {% if perms.enderecos.change_endereco %}
+          <a href="{% url 'endereco_update' endereco.id %}" class="btn btn-warning btn-sm">
+            <i class="bi bi-pencil"></i>
+          </a>
+          {% endif %}
+
+          {% if perms.enderecos.delete_endereco %}
+          <a href="{% url 'endereco_delete' endereco.id %}" class="btn btn-danger btn-sm btn-delete">
+            <i class="bi bi-trash"></i>
+          </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% include 'components/_pagination.html' %}
+
+{% endblock %}

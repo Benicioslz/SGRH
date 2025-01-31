@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h3 class="display-4">Detalhes do Endereço</h3>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ object.id }}</h3>
+        <p class="card-text">Logradouro: {{ object.logradouro }}</p>
+        <p class="card-text">CEP: {{ object.cep }}</p>
+        <p class="card-text">Número: {{ object.numero }}</p>
+        <p class="card-date">Complemento: {{ object.complemento}}</p>
+        <p class="card-text">Pessoa: {{ object.pessoa }}</p>
+        <p class="card-text">Bairro: {{ object.bairro }}</p>
+      </div>
+    </div>
+
+    <a href="{% url 'endereco_list' %}" class="btn btn-secondary mt-3">Voltar</a>
+  </div>
+{% endblock %}
