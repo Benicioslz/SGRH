@@ -56,7 +56,7 @@ Um sitema web simples, o objetivo deste projeto foi demonstrar como é feito na 
    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nome_do_banco_de_dados',
+        'NAME': 'nome_do_banco',
         'USER': 'nome_do_usuario',
         'PASSWORD': 'senha_do_usuario',
         'HOST': 'localhost',
