@@ -17,7 +17,7 @@ Um sitema web simples, o objetivo deste projeto foi demonstrar como é feito na 
 
 1. **Clone o Repositório:**
    ```bash
-   git clone [https://github.com/Benicioslz/SGRH.git](https://github.com/Benicioslz/SGRH.git)
+   git clone https://github.com/Benicioslz/SGRH.git
    ```
 
 2. **Navegue até o Diretório do Projeto:**
@@ -55,12 +55,12 @@ Um sitema web simples, o objetivo deste projeto foi demonstrar como é feito na 
    ```bash
    DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Ou 'django.db.backends.mysql', 'django.db.backends.sqlite3'
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'nome_do_banco_de_dados',
         'USER': 'nome_do_usuario',
         'PASSWORD': 'senha_do_usuario',
         'HOST': 'localhost',
-        'PORT': '5432',  # Ou a porta padrão do seu banco de dados
+        'PORT': '5432',
     }
   }
   ```
@@ -84,7 +84,7 @@ Um sitema web simples, o objetivo deste projeto foi demonstrar como é feito na 
        'USER': '<nome_do_usuario>',
        'PASSWORD': '<senha_do_usuario>',
        'HOST': 'localhost',
-       'PORT': '3306', # Porta padrão do MySQL
+       'PORT': '3306',
       }
   }
   ```
